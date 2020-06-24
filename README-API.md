@@ -3,6 +3,11 @@
 
 Microservicio de Autentificación
 
+- [Adopción](#adopción)
+	- [Eliminar Mascota en Adopción](#eliminar-mascota-en-adopción)
+	- [Listar Mascotas](#listar-mascotas)
+	- [Registrar Mascota en Adopción](#registrar-mascota-en-adopción)
+	
 - [Imagen](#imagen)
 	- [Guardar Imagen](#guardar-imagen)
 	- [Obtener Imagen](#obtener-imagen)
@@ -39,6 +44,172 @@ Microservicio de Autentificación
 	
 
 
+# <a name='adopción'></a> Adopción
+
+## <a name='eliminar-mascota-en-adopción'></a> Eliminar Mascota en Adopción
+[Back to top](#top)
+
+<p>Eliminar una mascota en Adopción.</p>
+
+	DELETE /v1/adoptpet/:id
+
+
+
+### Examples
+
+Header Autorización
+
+```
+Authorization=bearer {token}
+```
+
+
+### Success Response
+
+Response
+
+```
+HTTP/1.1 200 OK
+```
+
+
+### Error Response
+
+401 Unauthorized
+
+```
+HTTP/1.1 401 Unauthorized
+```
+500 Server Error
+
+```
+HTTP/1.1 500 Internal Server Error
+{
+   "error" : "Not Found"
+}
+```
+## <a name='listar-mascotas'></a> Listar Mascotas
+[Back to top](#top)
+
+<p>Obtiene un listado de las mascotas en adopción registradas.</p>
+
+	GET /v1/adoptpet
+
+
+
+### Examples
+
+Header Autorización
+
+```
+Authorization=bearer {token}
+```
+
+
+### Success Response
+
+Mascota
+
+```
+[
+  {
+    "id": "Id de mascota"
+    "name": "Nombre de la mascota",
+    "description": "Descripción de la mascota",
+    "foundDate": date (DD/MM/YYYY),
+  }, ...
+]
+```
+Response
+
+```
+HTTP/1.1 200 OK
+```
+
+
+### Error Response
+
+401 Unauthorized
+
+```
+HTTP/1.1 401 Unauthorized
+```
+500 Server Error
+
+```
+HTTP/1.1 500 Internal Server Error
+{
+   "error" : "Not Found"
+}
+```
+## <a name='registrar-mascota-en-adopción'></a> Registrar Mascota en Adopción
+[Back to top](#top)
+
+<p>Registrar Mascota en Adopción.</p>
+
+	POST /v1/adoptpet
+
+
+
+### Examples
+
+Mascota
+
+```
+{
+  "id": "Id mascota"
+}
+```
+Header Autorización
+
+```
+Authorization=bearer {token}
+```
+
+
+### Success Response
+
+Mascota
+
+```
+{
+  "id": "Id de mascota",
+  "name": "Nombre de la mascota",
+  "description": "Descripción de la mascota",
+  "birthDate": date (DD/MM/YYYY),
+}
+```
+
+
+### Error Response
+
+401 Unauthorized
+
+```
+HTTP/1.1 401 Unauthorized
+```
+400 Bad Request
+
+```
+HTTP/1.1 400 Bad Request
+{
+   "messages" : [
+     {
+       "path" : "{Nombre de la propiedad}",
+       "message" : "{Motivo del error}"
+     },
+     ...
+  ]
+}
+```
+500 Server Error
+
+```
+HTTP/1.1 500 Internal Server Error
+{
+   "error" : "Not Found"
+}
+```
 # <a name='imagen'></a> Imagen
 
 ## <a name='guardar-imagen'></a> Guardar Imagen
